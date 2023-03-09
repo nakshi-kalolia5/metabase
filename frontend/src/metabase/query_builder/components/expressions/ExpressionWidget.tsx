@@ -31,6 +31,7 @@ export interface ExpressionWidgetProps {
   startRule?: string;
 
   title?: string;
+  validateExpression?: boolean;
 
   reportTimezone: string;
 
@@ -45,6 +46,7 @@ const ExpressionWidget = (props: ExpressionWidgetProps): JSX.Element => {
     name: initialName,
     expression: initialExpression,
     withName = false,
+    validateExpression = true,
     startRule,
     title,
     reportTimezone,
@@ -61,8 +63,12 @@ const ExpressionWidget = (props: ExpressionWidgetProps): JSX.Element => {
 
   const helpTextTargetRef = useRef(null);
 
-  const isValid =
-    (withName ? !!name : true) && !error && isExpression(expression);
+  const isValidName = withName ? !!name : true;
+  const isValidExpression = validateExpression
+    ? isExpression(expression)
+    : true;
+
+  const isValid = !error && isValidName && isValidExpression;
 
   const handleCommit = () => {
     if (isValid && isNotNull(expression)) {
