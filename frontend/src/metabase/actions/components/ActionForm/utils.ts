@@ -37,7 +37,6 @@ const fieldPropsTypeMap: FieldPropTypeMap = {
   time: "time",
   number: "number",
   boolean: "boolean",
-  category: "category",
   select: "select",
   radio: "radio",
 };
